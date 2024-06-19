@@ -8,11 +8,11 @@ In the fall of 2020, I purchased an adapter to enable wireless CarPlay capabilit
 ![Carlinkit Adapter](images/CPC200-U2W.png)
 
 This device served me well for a long time, but I was often frustrated with 3 things:
-* The CarPlay interface was sluggish to input
+* The CarPlay interface was sluggish
 * There was a second or two delay between playing a song and hearing the audio
-* I'd often have to unplug and replug the device to get it to be recognized after starting my vehicle
+* I'd often have to unplug and replug the device for it to be recognized after starting my vehicle
 
-I didn't bother resolving these features as I could tolerate the nuisance and I was not worth it to me to purchase another adapter. Having had experience with automotive, and Chinese-brand devices in the past, I felt lucky it worked at all given the inconsistent implementation of standards and interfaces. Trying other devices, may not make any difference, and at the time there were not many to choose from.
+I didn't bother resolving these features as I could tolerate the nuisance and I was not worth it to me to purchase another adapter. Having had experience with some automotive, and Chinese-brand devices in the past, I felt lucky it worked at all given the inconsistent implementation of standards and interfaces. Trying other devices, may not make any difference, and at the time there were not many to choose from.
 
 ## Current Day 2024
 
@@ -28,11 +28,11 @@ The vehicle in which I had installed the CPC200-U2W Plus was not a vehicle I dro
 
 I eventually got tired of the notifications of connecting/disconnecting and discovered that if I manually connected to the Wi-Fi of the CPC200-U2W Plus, CarPlay would work just fine.
 
-As I discovered, CarPlay is a combination of Bluetooth and Wi-Fi association and handshaking. While discovering a CarPlay device is performed over Bluetooth, Wi-Fi is used for some (all) of the data transfers. This make sense, as the UI is being rendered on the phone and sent to the display unit, and that takes a lot of bandwidth.
+As I discovered, CarPlay is a combination of Bluetooth and Wi-Fi association and handshaking. While discovering a CarPlay device is performed over Bluetooth, Wi-Fi is used for some (all?) of the data transfers. This make sense, as the UI is being rendered on the phone and sent to the display unit, and that takes a lot of bandwidth.
 
-Upon manually connecting to my CPC200-U2W Plus Wi-Fi, I was presented an error of the likes "WPA TKIP is insecure in lockdown mode" (I don't think that was the exact error, but close).
+Upon manually connecting to my CPC200-U2W Plus Wi-Fi, I was presented an error: "WPA TKIP is insecure in lockdown mode" (I don't think that was the exact wording, but close).
 
-One might get frustrated with iOS lockdown mode over this inconvenience and disable lockdown - but this is a good thing! WPA and TKIP are very insecure, and this could expose all sorts of data to eavesdroppers. The better option would be to instead enable a more secure protocol.
+One might get frustrated with iOS lockdown mode over this inconvenience and disable lockdown - but this refusal by iOS in lockdown mode is a good thing! WPA and TKIP are very insecure, and this could expose all sorts of data to eavesdroppers. The better option would be to instead enable a more secure Wi-Fi protocol.
 
 ## Misery Loves Company
 
@@ -46,10 +46,10 @@ However, a poster noted that Carlinkit 5.0 (I later discovered mine was 2.0) did
 
 This is where things started to become more involved than I had initially planned:
 * First, the over-the-air (OTA) updates for my unit did not work. The procedure involves connecting to the Wi-Fi of the unit, then clicking update on a webpage at `192.168.50.2`. However, this did not work for me because it could not share traffic with my cellular connection (perhaps again due to lockdown mode)
-* Not a problem I thought, because I had read online at the Carlinkit site that the firmware could be manually updated with a USB drive - except you had to email them for it, which I thought was silly. Turns out, they had that procedure because their update process is not very robust.
+* Not a problem I thought, because I had read online at the Carlinkit site that the firmware could be manually updated with a USB drive. Great! - except you had to email them for it, which I thought was silly. Turns out, they had that procedure because their update process is not very robust. For the common user that makes sense, but for technical-minded people, it's annoying.
 * Looking to see if I could just get the firmware elsewhere, I stumbled across [ludwig-v/wireless-carplay-dongle-reverse-engineering](https://github.com/ludwig-v/wireless-carplay-dongle-reverse-engineering) repository where for the past couple of years some work was going on reverse engineer the firmware and collect various updates.
 
-So, this was looking promising I thought. After reading a few other threads, discussion posts in the repo, and elsewhere, I saw that version `2021.03.06.1343` seemed to be working for people. But I was still a bit confused as to which variant to install, and which one I had. There were descriptions of blue UIs, red UIs, AUTOKIT, and all sort of things that were not well documented in the repo or discussions.
+This was looking promising I thought. After reading a few other threads, discussion posts in the repo, and elsewhere, I saw that version `2021.03.06.1343` seemed to be working for people. But I was still a bit confused as to which variant to install, and which one I had. There were descriptions of blue UIs, red UIs, AUTOKIT, and all sort of things that were not well documented in the repo or discussions.
 
 I eventually decided to take my device apart, because someone (erroneously) said that devices based on AT91SAM9260 were very old and slow. Sure enough, my device did have a AT91SAM9260, but it turned out that is just a fake name. The CPU is actually a NXP/Freescale i.MX 6UltraLite, which I later confirmed myself once I had root access. This was very surprising to me, as I've seen fake chips before, but not one with such misleading identifiers.
 
@@ -57,7 +57,7 @@ I figured out I had a U2W V2 based on photos shared from others in the discussio
 
 ## The First Try (Never Succeeds)
 
-Feeling I had now had clarity on the image I should use, I decided to move forward with my attempt to update the device. I used `2021.03.06.1343` because as mentioned others seemed to have success with it, but also because the author of that repo had made some custom images that enabled "performance mode", ssh access, and other capabilities. Those sounded neat.
+Feeling I had now had clarity on the image I should use, I decided to move forward with my attempt to update the device. I used `2021.03.06.1343` because (as mentioned) others seemed to have success with it, but also because the author of that repo had made some custom images that enabled "performance mode", ssh access, and other capabilities. Those sounded neat.
 
 So, I updated my device with the stock image first, then the custom firmware. I plugged in the device to my car, and it was recognized... but, the Wi-Fi was still insecure. Though, this was a minor win at this point, because the CarPlay interface became much faster! And the admin screen at `192.168.50.2` offered some new features, such as adjusting the audio delay (buffer time really).
 
@@ -69,9 +69,9 @@ I wish now that future me had suddenly emerged from a portal at my workbench and
 
 But future me is never around when I need him. Lazy.
 
-So, it turned out this was a bad idea. While I could still access the admin screen (and even more interesting config options were now present), upon connecting the device to my car, the red light would just stay solid (it used to blink when searching) and the car's infotainment unit no longer recognized the device as a CarPlay unit.
+As you may have guessed, it turned out updating to the latest version was a very bad idea. While I could still access the admin screen (and even more interesting config options were now present), upon connecting the device to my car, the red light would just stay solid (it used to blink when searching) and the car's infotainment unit no longer recognized the device as a CarPlay unit.
 
-After many, many hours of plugging/unplugging, changing settings, downgrading firmware, etc. I found myself back on the custom `2021.03.06.1343` firmware no problem, but the car still would not recognize the device.
+After many, many hours of plugging/unplugging, changing settings, downgrading firmware, etc. I found myself back on the custom `2021.03.06.1343` firmware, but the car still would not recognize the device.
 
 ## What I Wish I Had Done
 
@@ -148,22 +148,24 @@ wget https://github.com/ludwig-v/wireless-carplay-dongle-reverse-engineering/raw
 sudo flashrom -pch341a_spi -c MX25L12835F/MX25L12845E/MX25L12865E -w MX25L12835F_FW_20210306.bronken.bin -VVV
 ```
 
-Note: On Ubuntu jammy, version 1.2 of `flashrom` is what is in the repos. I think 1.3 has a new `--progress` feature (it's in the man page), but I want to stay on an LTS release. The simple solution is to use the `-VVV` flag to see that something is happening, but I do think it slows down the already very slow read/write operations form the CH341a.
+Note: On Ubuntu jammy, version 1.2 of `flashrom` is what is in the repos. I think 1.3 has a new `--progress` feature (it's in the man page), but I want to stay on an LTS release. The simple solution is to use the `-VVV` flag to see that something is happening, but I do think it slows down the already very slow read/write operations form the CH341a. Expect reading and writing to take several minutes (there is an LED on the CH341a that shoudl be flickering if stuff is happening.)
 
 ## The Road to Glory
-Having restored the flash, I wanted to get back to the custom firmware so I could access the device with SSH and change the `hostapd.conf` again. I thought I could just update using the `2021.03.06_BASED`, but this seemed to fail as the LED flashing was too short-lived compared to other updates. I didn't even check, and decided to install the stock `2020.11.10.2138_ROLLBACK` as someone said that could fix activation issues, which I expected to have, then installed all the subsequent custom firmware in order until I was back on `2021.03.06.1343`
+Having restored the flash, I wanted to get back to the custom firmware so I could access the device with SSH and change the `hostapd.conf` again. I thought I could just update using the `2021.03.06_BASED`, but this seemed to fail as the device's LED flashing was too short-lived compared to other updates I had done. I didn't even check, and decided to install the stock `2020.11.10.2138_ROLLBACK` as someone said that could fix activation issues, which I expected to have, then installed all the subsequent custom firmware in order until I was back on `2021.03.06.1343`
 
 I then launched SSH, updated `hostapd.conf` and went to test the device. The good news: It was recognized by the car! This means I reverted whatever change that later firmware did that caused it to no longer be recognized. The bad news: it wanted activation.
 
-But I saved the `/etc/uuid_sign` - could I just update it to the old one and be good. Upon looking at the MD5 hashes, it was different contents than what I had. Therefore, I updated it with my file, tried again with the car, and wonderfully CarPlay worked without the activation screen. And icing on the cake (rather the whole point of this exercise) my changes to enable WPA2/CCMP for the `hostapd.conf` indeed made lockdown mode happy!
+But I saved the `/etc/uuid_sign` - could I just update it to the old one and be good? Upon looking at the MD5 hashes, it was indeed different contents than what I had. Therefore, I updated it with my file, tried again with the car, and wonderfully CarPlay worked without the activation screen. And icing on the cake (rather the whole point of this exercise) my changes to enable WPA2/CCMP for the `hostapd.conf` indeed made lockdown mode happy!
 
 I'm glossing over the fact that I removed the old recognized CarPlay devices in the vehicle, and in the admin screen of the CPC200-U2W Plus, but upon re-pairing the devices, CarPlay would now connect automatically even though my iOS device was in lockdown mode.
 
 ## Conclusion
-Success! I saved $80 or so by spending over a day hacking a device.
+Success! I saved $80 or so by spending over a day hacking at this infernal device.
 
-While the effort is not justified by the economics alone, I am glad I spend the time to get this device working for the following reasons:
+While the effort is not justified by the economics alone, I am glad I spent the time to get this device working for the following reasons:
 * We are far too disposable in our mindset as a society. It probably cost me more than $80 worth of my time compared to ordering a Carlinkit V5 from Amazon, but by giving my device a second life, I kept waste out of the landfill and reduced my carbon footprint from having planes and trucks deliver me a new device.
 * I learned a lot. I've been working with embedded devices for some time, but never saw an implementation quite like this. It also has made me more comfortable taking on repairs/mods of other devices before throwing them in the landfill in the future.
 
-In closing, if you have one of these devices and it's not working with iOS lockdown mode, it just needs a little love to enable more secure Wi-Fi protocols.
+Special thanks to ludwig-v and the community around the repo. Without their documented efforts, I would never have been able to meet my goal.
+
+In closing, if you have one of these devices and it's not working with iOS lockdown mode, it just needs a little love to enable a (more) secure Wi-Fi protocol.
