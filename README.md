@@ -162,7 +162,7 @@ I'm glossing over the fact that I removed the old recognized CarPlay devices in 
 ## Conclusion
 Success! I saved $80 or so by spending over a day hacking a device.
 
-While the economics are not quite justified, I am glad I spend the time to get this device working for the following reasons:
+While the effort is not justified by the economics alone, I am glad I spend the time to get this device working for the following reasons:
 * We are far too disposable in our mindset as a society. It probably cost me more than $80 worth of my time compared to ordering a Carlinkit V5 from Amazon, but by giving my device a second life, I kept waste out of the landfill and reduced my carbon footprint from having planes and trucks deliver me a new device.
 * I learned a lot. I've been working with embedded devices for some time, but never saw an implementation quite like this. It also has made me more comfortable taking on repairs/mods of other devices before throwing them in the landfill in the future.
 
